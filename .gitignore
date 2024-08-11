@@ -1,0 +1,16 @@
+# Ignore PyCharm's project settings folder
+.idea/
+
+# Ignore Python virtual environment folder
+.venv/
+
+# Ignore __pycache__ folders
+__pycache__/
+*.py[cod]
+
+# Ignore any other OS or IDE specific files
+.DS_Store
+*.swp
+
+# ignore asset
+asset/
