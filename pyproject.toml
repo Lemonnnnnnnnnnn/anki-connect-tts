@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "anki-connect-tts"
+version = "0.1.0"
+description = ""
+authors = ["velvet crow <lemon.asd99@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+tts = {git = "https://github.com/coqui-ai/TTS.git"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
