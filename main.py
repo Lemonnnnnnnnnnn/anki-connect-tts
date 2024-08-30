@@ -13,11 +13,13 @@ def add_audio_to_all_notes():
     notes = get_card_fields(note_ids)
     texts = [note['fields']['Context']['value'] for note in notes]
 
-    wavs = infer_audio(texts)
+    # for text in texts:
+    #     wavs = infer_audio([text])
 
     for i, note in enumerate(notes):
+        wavs = infer_audio([texts[i]])
         note_id = note['noteId']
-        wav_data = wavs[i]
+        wav_data = wavs[0]
 
         audio_filename = store_audio_to_anki(wav_data, note_id)
         update_card_audio(note_id, audio_filename)
