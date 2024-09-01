@@ -3,6 +3,7 @@
 git clone https://github.com/Lemonnnnnnnnnnn/anki-connect-tts
 cd anki-connect-tts
 pip install -r requirements.txt
+python -m unidic download
 ```
 
 # Use

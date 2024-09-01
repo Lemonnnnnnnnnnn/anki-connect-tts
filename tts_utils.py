@@ -1,22 +1,13 @@
-import torch
-from TTS.api import TTS
+from melo.api import TTS
 
-MODEL_NAME = "tts_models/en/ljspeech/tacotron2-DDC"  # 选择你需要的模型
 
-# Get device
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-# Init TTS
-tts = TTS(model_name=MODEL_NAME).to(device)
-
-def infer_audio(texts: list):
-    # Run TTS
-    # ❗ Since this model is multi-lingual voice cloning model, we must set the target speaker_wav and language
-    # Text to speech list of amplitude values as output
+def infer_audio(texts: list, model: TTS):
     wavs = []
+    speaker_ids = model.hps.data.spk2id
+    speed = 1.0
+
     for text in texts:
-        wav = tts.tts(text=text)
+        wav = model.tts_to_file(text, speaker_ids['EN-US'], speed=speed)
         wavs.append(wav)
 
     return wavs
-

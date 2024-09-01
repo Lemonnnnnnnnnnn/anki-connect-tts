@@ -43,10 +43,10 @@ def get_card_fields(note_ids):
     response = requests.post(ANKI_CONNECT_URL, json=payload)
     return response.json()['result']
 
-def store_audio_to_anki(wav_data, note_id):
+def store_audio_to_anki(wav_data, note_id , model):
     audio_filename = f"{note_id}.wav"
     # 保存音频文件
-    soundfile.write(audio_filename, wav_data, 24000)
+    soundfile.write(audio_filename, wav_data, model.hps.data.sampling_rate)
 
     with open(audio_filename, "rb") as f:
         audio_content = f.read()
