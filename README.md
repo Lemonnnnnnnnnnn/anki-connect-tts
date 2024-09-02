@@ -2,7 +2,7 @@
 ```
 git clone https://github.com/Lemonnnnnnnnnnn/anki-connect-tts
 cd anki-connect-tts
-pip install -r requirements.txt
+pip install git+https://github.com/myshell-ai/MeloTTS.git
 python -m unidic download
 ```
 
