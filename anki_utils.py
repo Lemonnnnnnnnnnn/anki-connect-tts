@@ -7,6 +7,7 @@ import torchaudio
 import torch
 
 import soundfile
+import numpy as np
 
 ANKI_CONNECT_URL = 'http://localhost:8765'
 
@@ -47,9 +48,8 @@ def get_card_fields(note_ids):
 
 def store_audio_to_anki(wav_data, note_id):
     audio_filename = f"{note_id}.wav"
-    print
     # 保存音频文件
-    soundfile.write(audio_filename, wav_data, 24000)
+    soundfile.write(audio_filename, np.ravel(wav_data) , 24000)
     # torchaudio.save(audio_filename, torch.from_numpy( wav_data), 24000)
 
     with open(audio_filename, "rb") as f:
