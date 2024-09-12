@@ -21,7 +21,7 @@ def add_audio_to_all_notes():
         note_id = note['noteId']
         wav_data = wavs[0]
 
-        audio_filename = store_audio_to_anki(wav_data, note_id)
+        audio_filename = store_audio_to_anki(wav_data, note)
         update_card_audio(note_id, audio_filename)
         print(f"为卡片 {note_id} 添加了音频")
 
@@ -41,7 +41,7 @@ def update_audio_for_notes(timestamp):
         note_id = note['noteId']
         wav_data = wavs[i]
 
-        audio_filename = store_audio_to_anki(wav_data, note_id)
+        audio_filename = store_audio_to_anki(wav_data, note)
         update_card_audio(note_id, audio_filename)
         print(f"为卡片 {note_id} 添加了音频")
 
