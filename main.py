@@ -1,7 +1,8 @@
 import argparse
 from anki_utils import get_empty_audio_cards, get_note_by_timestamp, get_card_fields, store_audio_to_anki, \
     update_card_audio
-from tts_utils import infer_audio
+from prerun import download_asset
+from tts_utils import infer_audio, init_tts
 
 
 def add_audio_to_all_notes():
@@ -13,11 +14,10 @@ def add_audio_to_all_notes():
     notes = get_card_fields(note_ids)
     texts = [note['fields']['Context']['value'] for note in notes]
 
-    # for text in texts:
-    #     wavs = infer_audio([text])
+    chat = init_tts()
 
     for i, note in enumerate(notes):
-        wavs = infer_audio([texts[i]])
+        wavs = infer_audio([texts[i]] , chat)
         note_id = note['noteId']
         wav_data = wavs[0]
 
@@ -35,7 +35,9 @@ def update_audio_for_notes(timestamp):
     notes = get_card_fields(note_ids)
     texts = [note['fields']['Context']['value'] for note in notes]
 
-    wavs = infer_audio(texts)
+    chat = init_tts()
+
+    wavs = infer_audio(texts , chat)
 
     for i, note in enumerate(notes):
         note_id = note['noteId']
@@ -63,4 +65,5 @@ def main():
 
 
 if __name__ == "__main__":
+    download_asset()
     main()
