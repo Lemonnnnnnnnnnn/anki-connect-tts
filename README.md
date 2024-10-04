@@ -3,11 +3,7 @@
 git clone https://github.com/Lemonnnnnnnnnnn/anki-connect-tts
 cd anki-connect-tts
 pip install -r requirements.txt
-```
-
-more step for windows and macos:
-```
-conda install -c conda-forge pynini=2.1.6.post1
+pip install coqui-tts 
 ```
 
 # Use
