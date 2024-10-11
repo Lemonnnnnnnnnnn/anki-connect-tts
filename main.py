@@ -45,21 +45,54 @@ def update_audio_for_notes(timestamp):
         update_card_audio(note_id, audio_filename)
         print(f"为卡片 {note_id} 添加了音频")
 
-
-def main():
+def parse_args():
     parser = argparse.ArgumentParser(description="Anki Audio Manager")
     parser.add_argument('--add', action='store_true', help='Add audio to all notes with missing audio')
     parser.add_argument('--update', type=str, help='Update audio for notes with a specific timestamp')
 
-    args = parser.parse_args()
+    # 只在程序启动时解析命令行参数
+    return parser.parse_args()
 
+def main():
+    args = parse_args()
+
+    # 处理命令行参数
     if args.add:
         add_audio_to_all_notes()
     elif args.update:
-        if not args.update:
-            print("请提供时间戳")
+        update_audio_for_notes(args.update)
+
+    # 进入交互式循环
+    while True:
+        command = input("> ").strip()
+
+        if command == "quit" or command == "exit":
+            print("Exiting...")
+            sys.exit(0)
+        elif command == "add":
+            add_audio_to_all_notes()
+        elif command.startswith("update"):
+            # 提取用户输入的时间戳
+            parts = command.split()
+            if len(parts) == 2:
+                update_audio_for_notes(parts[1])
+            else:
+                print("请提供时间戳：update <timestamp>")
         else:
-            update_audio_for_notes(args.update)
+            print(f"Unknown command: '{command}'")
+    # parser = argparse.ArgumentParser(description="Anki Audio Manager")
+    # parser.add_argument('--add', action='store_true', help='Add audio to all notes with missing audio')
+    # parser.add_argument('--update', type=str, help='Update audio for notes with a specific timestamp')
+
+    # args = parser.parse_args()
+
+    # if args.add:
+    #     add_audio_to_all_notes()
+    # elif args.update:
+    #     if not args.update:
+    #         print("请提供时间戳")
+    #     else:
+    #         update_audio_for_notes(args.update)
 
 
 if __name__ == "__main__":
