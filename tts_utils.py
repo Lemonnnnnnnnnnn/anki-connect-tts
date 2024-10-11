@@ -13,17 +13,17 @@ tts = TTS(model_name=MODEL_NAME).to(device)
 # 获取可用的音色列表（根据模型的不同可能会有所不同）
 available_voices = tts.speakers
 
-# 随机选择一个音色
-selected_voice = random.choice(available_voices)
-
-print("selected_voice",selected_voice)
-
 def infer_audio(texts: list):
     # Run TTS
     # ❗ Since this model is multi-lingual voice cloning model, we must set the target speaker_wav and language
     # Text to speech list of amplitude values as output
     wavs = []
     for text in texts:
+        # 随机选择一个音色
+        selected_voice = random.choice(available_voices)
+
+        print("selected_voice",selected_voice)
+
         wav = tts.tts(text=text, speaker=selected_voice,language="en")
         wavs.append(wav)
 
